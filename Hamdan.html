@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HK FARM - E-Commerce Peternakan</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f8f2;
+    }
+
+    header {
+        background-color: #2e7d32;
+        color: white;
+        padding: 15px;
+        text-align: center;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: #388e3c;
+    }
+
+    nav a {
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    nav a:hover {
+        background-color: #2e7d32;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: #ddd;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-body h3 {
+        margin: 0 0 10px;
+    }
+
+    .price {
+        color: #2e7d32;
+        font-weight: bold;
+    }
+
+    button {
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #1b5e20;
+    }
+
+    #cart {
+        display: none;
+    }
+
+    footer {
+        background-color: #2e7d32;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>HK FARM</h1>
+    <p>Penjualan Kambing, Domba & Sapi Berkualitas</p>
+</header>
+
+<nav>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('products')">Produk</a>
+    <a onclick="showPage('cart')">Keranjang (<span id="cart-count">0</span>)</a>
+    <a onclick="showPage('contact')">Kontak</a>
+</nav>
+
+<div class="container" id="home">
+    <h2>Selamat Datang di HK FARM</h2>
+    <p>Kami menyediakan kambing, domba, dan sapi terbaik baik utuh maupun daging segar dengan kualitas premium.</p>
+</div>
+
+<div class="container" id="products" style="display:none;">
+    <h2>Produk Kami</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <img src="images/kambing1.jpg" alt="Kambing">
+            <div class="card-body">
+                <h3>Kambing Premium</h3>
+                <p class="price">Rp 3.000.000</p>
+                <button onclick="addToCart('Kambing Premium', 3000000)">Beli</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/domba1.jpg" alt="Domba">
+            <div class="card-body">
+                <h3>Domba Super</h3>
+                <p class="price">Rp 2.500.000</p>
+                <button onclick="addToCart('Domba Super', 2500000)">Beli</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/sapi1.jpg" alt="Sapi">
+            <div class="card-body">
+                <h3>Sapi Berkualitas</h3>
+                <p class="price">Rp 15.000.000</p>
+                <button onclick="addToCart('Sapi Berkualitas', 15000000)">Beli</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/daging_kambing.jpg" alt="Daging">
+            <div class="card-body">
+                <h3>Daging Kambing Segar</h3>
+                <p class="price">Rp 150.000/kg</p>
+                <button onclick="addToCart('Daging Kambing', 150000)">Beli</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container" id="cart">
+    <h2>Keranjang Belanja</h2>
+    <ul id="cart-items"></ul>
+    <h3>Total: Rp <span id="total">0</span></h3>
+</div>
+
+<div class="container" id="contact" style="display:none;">
+    <h2>Kontak Kami</h2>
+    <p>Email: hkfarm@email.com</p>
+    <p>WhatsApp: 0812-xxxx-xxxx</p>
+</div>
+
+<footer>
+    <p>© 2026 HK FARM - All Rights Reserved</p>
+</footer>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function showPage(page) {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('products').style.display = 'none';
+        document.getElementById('cart').style.display = 'none';
+        document.getElementById('contact').style.display = 'none';
+
+        document.getElementById(page).style.display = 'block';
+    }
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        total += price;
+
+        document.getElementById('cart-count').innerText = cart.length;
+
+        let li = document.createElement('li');
+        li.innerText = name + " - Rp " + price;
+        document.getElementById('cart-items').appendChild(li);
+
+        document.getElementById('total').innerText = total;
+
+        alert(name + " berhasil ditambahkan ke keranjang!");
+    }
+</script>
+
+</body>
+                  </html>
